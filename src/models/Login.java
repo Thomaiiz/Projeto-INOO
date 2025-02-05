@@ -8,6 +8,10 @@ import entitites.Professor;
 import entitites.Usuario;
 
 public class Login{
+	
+	public Login() {
+	
+	}
 
 	public Usuario verificarLogin(String username,String senha,int opcao, List<Professor> professores,List<Estudante> estudantes) {
 		if(opcao == 1) {

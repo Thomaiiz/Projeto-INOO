@@ -17,9 +17,32 @@ public class Estudante extends Usuario {
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
 	}
+	
+	public String getProntuario() {
+		return prontuario;
+	}
 
+	public void setProntuario(String prontuario) {
+		this.prontuario = prontuario;
+	}
 
+	public String getNome() {
+		return nome;
+	}
 
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+	
+	
 	private void matricularMateria() {
 		
 	}
@@ -27,5 +50,7 @@ public class Estudante extends Usuario {
 	private void consultarRendimento() {
 		
 	}
+
+
 	
 }
