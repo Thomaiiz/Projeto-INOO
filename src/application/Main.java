@@ -2,6 +2,9 @@ package application;
 
 import java.util.Scanner;
 
+import entitites.Usuario;
+import models.Login;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -25,6 +28,9 @@ public class Main {
 				String user = sc.next();		
 				System.out.println("Digite sua senha: ");
 				String senha = sc.next();
+				
+				Login lg = new Login();
+				Usuario loggin = lg.verificarLogin(user, senha, opcao,  professores, estudantes); 
 				
 				
 		}
