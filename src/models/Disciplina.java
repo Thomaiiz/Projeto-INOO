@@ -62,6 +62,15 @@ public class Disciplina {
 	public void adicionarTurma(Turma turma) {
 		this.turmas.add(turma);
 	}
+
+	public List<Turma> getTurmas() {
+		return turmas;
+	}
+
+	public void setTurmas(List<Turma> turmas) {
+		this.turmas = turmas;
+	}
+	
 	
 	
 	

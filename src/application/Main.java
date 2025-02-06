@@ -1,6 +1,6 @@
 package application;
 
-import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -11,11 +11,14 @@ import entitites.Professor;
 import entitites.Usuario;
 import models.Disciplina;
 import models.Login;
+import models.Turma;
 
 public class Main {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
+		 DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
 		Administrador adm = new Administrador("admin","admin");
 		int opcao = 0;
 		List<Estudante> alunosVazios = new ArrayList<>();
@@ -35,6 +38,7 @@ public class Main {
 			
 			System.out.println("Usuario: ");
 			String user = sc.nextLine();
+			sc.nextLine();
 			System.out.println("Senha: ");
 			String senha = sc.nextLine();
 
@@ -43,6 +47,7 @@ public class Main {
 			
 			while(true) {
 				if(loggin instanceof Estudante) {
+					Estudante estudantes = (Estudante) loggin;
 					System.out.println("Bem vindo Estudante! ");
 					System.out.println("1 - Visualizar e se cadastrar em uma turma ");
 					System.out.println("2 - Consultar Rendimento/Faltas/Situação em cada turma");
@@ -52,26 +57,70 @@ public class Main {
 					if(option == 1) {
 						
 						
+						
 					}else if(option == 2) {
 						
-					}else if(option == 3) {
+					}else {
 						
 					}
 				}
 				
 				if(loggin instanceof Professor) {
+					Professor professor = (Professor) loggin;
+					System.out.println("Bem vindo Professor! ");
+					System.out.println("1 - Cadastrar Avaliacao: ");
+					System.out.println("2 - Inserir as notas: ");
+					System.out.println("3 - Registrar faltas: ");
+					System.out.println("4 - Relatorio de Alunos: ");
+					System.out.println("5 - Relatorio de Turmas: ");
+					System.out.println("0 - Sair ");
 					
-					
-					
-					
-					int option;
+					int option = 0;
 					
 					if(option == 1) {
+						System.out.println("Digite o nome da avaliacao: ");
+						String name = sc.nextLine();
+						System.out.println("Digite o peso da avalicao");
+						double peso = sc.nextDouble();
+						System.out.println("Digite a data da avalicacao");
+						DateTimeFormatter data = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 						
-					}
+						
+					}else if(option == 2){
+						System.out.println("Insira a turma: ");
+						String turma = sc.nextLine();
+						System.out.println("Inserir avaliacao: ");
+						String aval = sc.nextLine();
+						System.out.println("Coloque o estudante: ");
+						String estudante = sc.nextLine();
+						System.out.println("Digite a nota: ");
+						double nota = sc.nextDouble();
+						
+						professor.inserirNotas(turma, aval, estudante, nota);
+					}else if(option == 3) {
+						
+						System.out.println("Digite o nome do estudante: ");
+	                    String nomeAluno = sc.nextLine();
+	                    System.out.println("Digite o código da turma: ");
+	                    String codigo = sc.nextLine();
+	                    Turma turma = adm.buscarT(codigo);
+	                        Estudante estudante = adm.buscarE(turma, nomeAluno);
+	                            professor.registrarFaltas(turma, estudante);
+	                    
+					}else if(option == 4) {
+						System.out.println("Digite a turma:");
+						Turma turma = sc.nextLine();
+						relatorioAlunos(turma);
+						
+					}else if(option == 5) {
+						System.out.println("Turma: ");
+						
+						
+					}else 
 				}
 				
 				if(loggin instanceof Administrador) {
+					Administrador administrador = (Administrador) loggin;
 					System.out.println("Bem vindo Administrador! ");
 					System.out.println("1 - Cadastrar Professor ");
 					System.out.println("2 - Cadastrar Estudante ");
@@ -88,13 +137,12 @@ public class Main {
 						String usern = sc.nextLine();
 						System.out.println("Prontuario do professor");
 						String pront = sc.nextLine();
-						
-						System.out.println("Data de Nascimento: ");
-						
+						System.out.println("Data de Nascimento: "); 
+						DateTimeFormatter data = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 						System.out.println("Senha:");
-						String codigo = sc.nextLine();
+						String senha1 = sc.nextLine();
 						
-						adm.cadastrarProfessor(codigo, usern, pront, null, senha);
+						adm.cadastrarProfessor(usern, senha1, pront, name, data);
 						
 					}else if(option == 2) {
 	                    System.out.println("Nome do estudante:");
@@ -104,13 +152,11 @@ public class Main {
 	                    System.out.println("Senha do estudante: ");
 	                    String senhar = sc.nextLine();
 	                    System.out.println("Date de Nascimento: ");
-	                    
-	                    System.out.println(); //AQUI LOCAL DATE
-	                    
+	                    DateTimeFormatter data = DateTimeFormatter.ofPattern("dd/MM/yyyy");	                    
 	                    System.out.println("Prontuario do aluno");
 	                    String prontuar = sc.nextLine();
 	                    
-	                    adm.cadastrarEstudantes(name, username, prontuar, null, senhar);
+	                    adm.cadastrarEstudantes(username, senhar, name, prontuar, data);
 					}else if(option == 3) {
 						  System.out.println("Nome da Disciplina:");
 		                    String name = sc.nextLine();
@@ -145,30 +191,6 @@ public class Main {
 					}else {
 						break;
 					}
-				}else if(loggin instanceof Professor) {
-					System.out.println("Bem vindo professor!");
-					System.out.println("1 - Cadastrar Avaliação ");
-					System.out.println("2 - Inserir as notas ");
-					System.out.println("3 - Registrar faltas de alunos");
-					System.out.println("4 - Gerar relatorio dos alunos ");
-					System.out.println("5 - Gerar relatorio da turma ");
-					System.out.println("0 - Sair ");
-					int option = sc.nextInt();
-					
-					if(option == 1) {
-						
-					}else if(option == 2) {
-						
-					}else if(option == 3) {
-						
-					}else if(option == 4) {
-						
-					}else if(option == 5) {
-						
-					}else {
-						break;
-					}
-					
 				}
 				
 				

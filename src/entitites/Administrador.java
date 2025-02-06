@@ -1,6 +1,7 @@
 package entitites;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import models.Disciplina;
 import models.Turma;
 
 public class Administrador extends Usuario{
-	private LocalDate dataNascimento;
+	private DateTimeFormatter dataNascimento;
 	
 	//Aqui são as listas para armazenar professores,estudantes,discplinas e turmas
 	
@@ -39,15 +40,15 @@ public class Administrador extends Usuario{
 	
 	//Função que cadastra professor, recebendo os parametros do administrador e alocando na lista (professores)
 
-	public void cadastrarProfessor(String nome,String username,String prontuario,LocalDate dataNascimento,String senha) {
-		Professor professor = new Professor(nome,username,senha,prontuario,dataNascimento);
+	public void cadastrarProfessor(String username,String senha,String prontuario,String nome,DateTimeFormatter data) {
+		Professor professor = new Professor(username,senha,prontuario,nome,data);
 		professores.add(professor);
 	}
 	
 	//Função que cadastra estudante, recebendo os parametros do administrador e alocando na lista (estudantes)
 	
-	public void cadastrarEstudantes(String nome,String username,String prontuario,LocalDate dataNascimento,String senha) {
-		Estudante estudante = new Estudante(nome,username,senha,prontuario,dataNascimento);
+	public void cadastrarEstudantes(String username,String senha,String prontuario,String nome,DateTimeFormatter data) {
+		Estudante estudante = new Estudante(username,senha,prontuario,nome,data);
 		estudantes.add(estudante);
 	}
 	
